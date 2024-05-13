@@ -1,5 +1,10 @@
 package com.example.domain;
 
+/**
+ * 管理者情報を表すドメイン 
+ * @author yamaomarina
+*/
+
 public class Administrator {
 
     /**administrators テーブルのID */
@@ -10,7 +15,7 @@ public class Administrator {
 
     /**administrators テーブルのメールアドレス */
     private String mailAddress;
-    
+
     /**administrators テーブルのパスワード */
     private String password;
 
@@ -59,3 +64,4 @@ public class Administrator {
     
 
 }
+
