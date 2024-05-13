@@ -19,4 +19,9 @@ public class AdministratorService {
         repository.insert(administrator);
     }
 
+    /** ログイン処理をする*/
+    public Administrator login(String mailAddress,String password){
+        return repository.findByMailAddressAndPassword(mailAddress, password);
+    }
+
 }
