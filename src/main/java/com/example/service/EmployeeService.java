@@ -9,6 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.domain.Employee;
 import com.example.repository.EmployeeRepository;
 
+/**
+ * EmployeeServiceの定義
+ * @author yamaomarina
+ */
 @Service
 @Transactional
 public class EmployeeService {
@@ -16,6 +20,7 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    /**従業員情報を全取得する */
     public List<Employee> showList(){
         return employeeRepository.findAll();
     }
