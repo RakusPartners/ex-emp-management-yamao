@@ -3,8 +3,7 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +15,7 @@ import com.example.form.LoginForm;
 import com.example.service.AdministratorService;
 
 import ch.qos.logback.core.joran.util.beans.BeanUtil;
+import jakarta.servlet.http.HttpSession;
 
 /**
  * AdministratorController クラスの定義
@@ -66,16 +66,33 @@ public class AdministratorController {
         return new LoginForm();
     }
 
+    /**ログイン処理をする */
     @GetMapping("/")
-    public String toLogin(
-        @Validated LoginForm form
-        ,BindingResult result
-        ){
-            if(result.hasErrors()){
-                return "administrator/login";
-            }
-
+    public String toLogin(LoginForm form){
         return "administrator/login";
+    }
+
+    @Autowired
+    private HttpSession session;
+
+    
+    @PostMapping("/login")
+    public String login(LoginForm form,Model model){
+
+
+        /**administratorServiceのload()メソッドを呼び、Administratorオブジェクトを戻り値として受け取る */
+        Administrator administrator = administratorService.login(form.getMailAddress(), form.getPassword());
+
+        /**戻り値がnullの場合の処理 */
+        if(administrator == null){
+            model.addAttribute("errorMessage","メールアドレスまたはパスワードが不正です");
+            return "administrator/login";
+        }else{
+            session.setAttribute("administratorName", administrator.getName());
+            return "redirect:/employee/showList";
+        }
+        
+        
     }
 
 }

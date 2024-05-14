@@ -26,7 +26,7 @@ public class AdministratorRepository {
 
         administrator.setId(rs.getInt("id"));
         administrator.setName(rs.getString("name"));
-        administrator.setMailAddress(rs.getString("mailAddress"));
+        administrator.setMailAddress(rs.getString("mail_Address"));
         administrator.setPassword(rs.getString("password"));
         return administrator;
     };
@@ -49,6 +49,7 @@ public class AdministratorRepository {
             } catch (Exception e) {
             // 例外が発⽣したら null を返す
             return null;
+            
             }
 
     }
