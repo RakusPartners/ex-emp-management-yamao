@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Administrator;
 import com.example.form.InsertAdministratorForm;
+import com.example.form.LoginForm;
 import com.example.service.AdministratorService;
 
 import ch.qos.logback.core.joran.util.beans.BeanUtil;
@@ -50,6 +51,12 @@ public class AdministratorController {
         administratorService.insert(administrator);
         return "redirect://";
 
+    }
+
+    /**login.htmlにフォワードする処理 */
+    @GetMapping("/")
+    public String toLogin(LoginForm form){
+        return "administrator/login";
     }
 
 }
