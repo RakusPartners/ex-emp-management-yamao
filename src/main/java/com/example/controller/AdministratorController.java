@@ -3,7 +3,10 @@ package com.example.controller;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -34,7 +37,7 @@ public class AdministratorController {
 
     @GetMapping("/toInsert")
     public String toInsert(InsertAdministratorForm form){
-        return "administrator/insert.html";
+        return "administrator/insert";
     }
 
     /**
@@ -53,9 +56,25 @@ public class AdministratorController {
 
     }
 
-    /**login.htmlにフォワードする処理 */
+    /**
+     * login.htmlにフォワードする処理
+     * 入力値エラー処理 
+     */
+
+    @ModelAttribute
+    public LoginForm setUpForm(){
+        return new LoginForm();
+    }
+
     @GetMapping("/")
-    public String toLogin(LoginForm form){
+    public String toLogin(
+        @Validated LoginForm form
+        ,BindingResult result
+        ){
+            if(result.hasErrors()){
+                return "administrator/login";
+            }
+
         return "administrator/login";
     }
 

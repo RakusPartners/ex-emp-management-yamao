@@ -45,11 +45,12 @@
             th:action="@{/login}" th:object="${loginForm}">
               <fieldset>
                 <legend>ログイン</legend>
-                <div class="form-group">
+                <div class="form-group" th:if="${errorMessage != null}">
                   <div class="alert alert-danger">
-                    <p>メールアドレスまたはパスワードが間違っています</p>
+                    <p th:text="${erroeMessage}">メールアドレスまたはパスワードが間違っています</p>
                   </div>
                 </div>
+
                 <div class="form-group">
                   <label for="mailAddress">メールアドレス:</label>
                   <input
@@ -66,7 +67,7 @@
                   <input
                     type="password"
                     name="password"
-                    th:field="*{passwaord}"
+                    th:field="*{password}"
                     id="inputPassword"
                     class="form-control"
                     placeholder="Password"
