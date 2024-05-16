@@ -95,4 +95,11 @@ public class AdministratorController {
         
     }
 
+    /**ログアウトをする */
+    @GetMapping("/logout")
+    public String logout(LoginForm form){
+        session.invalidate();
+        return "redirect://";
+    }
+
 }

@@ -50,9 +50,9 @@ public class EmployeeController {
     @PostMapping("/update")
     public String upadte(UpdateEmployeeForm form){
         int num = Integer.valueOf(form.getId());
-        employeeService.showDetail(num);
+        
 
-        Employee employee = new Employee();
+        Employee employee = employeeService.showDetail(num);
         int dependents = Integer.valueOf(form.getDependentsCount());
         employee.setDependentsCount(dependents);
 
