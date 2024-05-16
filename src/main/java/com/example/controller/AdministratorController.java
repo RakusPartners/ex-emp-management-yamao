@@ -52,7 +52,7 @@ public class AdministratorController {
         Administrator administrator = new Administrator();
         BeanUtils.copyProperties(form, administrator);
         administratorService.insert(administrator);
-        return "redirect://";
+        return "redirect:/";
 
     }
 
@@ -99,7 +99,7 @@ public class AdministratorController {
     @GetMapping("/logout")
     public String logout(LoginForm form){
         session.invalidate();
-        return "redirect://";
+        return "redirect:/";
     }
 
 }
